@@ -23,6 +23,8 @@ public class Seller implements Serializable {
 		this.birthDate = birthDate;
 		this.department = department;
 	}
+	public Seller() {
+	};
 
 	public Integer getId() {
 		return id;
