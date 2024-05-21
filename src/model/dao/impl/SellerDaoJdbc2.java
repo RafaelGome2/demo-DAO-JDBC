@@ -13,10 +13,10 @@ import model.dao.sellerDao;
 import model.entities.Department;
 import model.entities.Seller;
 //nesta classe ocorre a implementaçao da interface sellerDao
-public class SellerDaoJdbc implements sellerDao {
+public class SellerDaoJdbc2 implements sellerDao {
 		private Connection conn;
 //--------construtor----------------------		
-		public SellerDaoJdbc (Connection conn) {
+		public SellerDaoJdbc2 (Connection conn) {
 		this.conn= conn;
 	}
 //---------------------------------------		
@@ -52,11 +52,10 @@ public class SellerDaoJdbc implements sellerDao {
 //			Department dep = new Department();
 //			dep.setId(rs.getInt(6));//departmentId = coluna 6
 //			dep.setName(rs.getString(7));
-					Department dep = instantiateDepartment(rs);
-					Seller obj = instantiateSeller(rs, dep);
-					return obj;
-				}
-				
+					dep(rs);
+					funcSeller(rs, dep(rs));
+		}
+				return funcSeller(rs, dep(rs));
 			} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -72,20 +71,20 @@ public class SellerDaoJdbc implements sellerDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	private Department instantiateDepartment(ResultSet rs) throws SQLException {
+	private Department dep(ResultSet rs) throws SQLException {
 		Department dep = new Department();
 		dep.setId(rs.getInt(6));//departmentId = coluna 6
 		dep.setName(rs.getString(7));
 		return dep;
 	}
-	private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException {
+	private Seller funcSeller(ResultSet rs, Department dep) throws SQLException {
 		Seller obj = new Seller();
 		obj.setId(rs.getInt(1));
 		obj.setName(rs.getString(2));
 		obj.setEmail(rs.getString(3));
 		obj.setBirthDate(rs.getDate(4));
 		obj.setBaseSalary(rs.getDouble(5));
-		obj.setDepartment(dep);
+		obj.setDepartment(dep(rs));
 		return obj;
 	}
 
